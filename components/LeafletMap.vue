@@ -1,7 +1,7 @@
 <template>
   <div class="z-[5000000] h-screen w-screen absolute flex flex-col items-center justify-center" v-if="status === 'pending'">
     <span class="loader"></span>
-    <p class="text-lg font-semibold text-gray-800">Chargement...</p>
+    <p class="text-lg font-semibold text-gray-800">Actualisation des stations...</p>
   </div>
 
   <div v-else-if="status === 'error'">
@@ -9,10 +9,9 @@
   </div>
 
   <div v-else>
-    <LMap draggable="false" :use-global-leaflet="false" style="height: 100vh" :zoom="14" :minZoom="14" :center="[47.216671, -1.55]">
-  
+    <LMap class=" z-10" draggable="false" :use-global-leaflet="false" style="height: 100vh" :zoom="14" :minZoom="14" :center="[47.216671, -1.55]">
       <LControl position="topleft">
-        <USelect class="bg-white color-black" variant="outline" @change="handleChange" v-model="selectedOption" :options="options" />
+        <USelect class="bg-white color-black rounded-xl" variant="outline" @change="handleChange" v-model="selectedOption" :options="options" />
       </LControl>
   
       <LTileLayer
@@ -47,7 +46,7 @@
       }
     }
   }
-
+  
   onMounted(() => {
     setInterval(() => {
       refresh()
@@ -67,4 +66,5 @@
   
   const selectedOption = ref('all')
   watch(selectedOption, handleChange)
+
 </script>
